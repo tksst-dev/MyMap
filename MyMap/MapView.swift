@@ -19,6 +19,9 @@ struct MapView: UIViewRepresentable {
     func updateUIView(_ uiView: MKMapView, context: Context) {
         // デバッグエリアへ出力
         print(searchKey)
+        
+        uiView.mapType = mapType
+        
         // CLGeocoderインスタンスを取得
         let geocoder = CLGeocoder()
         
@@ -38,9 +41,9 @@ struct MapView: UIViewRepresentable {
                     pin.coordinate = targetCoordinate
                     
                     pin.title = searchKey
-                    
+                    // ピンを配置
                     uiView.addAnnotation(pin)
-                    
+                    // 半径５００mを表示
                     uiView.region = MKCoordinateRegion(
                         center: targetCoordinate,
                         latitudinalMeters: 500.0,
